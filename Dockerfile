@@ -1,18 +1,22 @@
-FROM golang:1.18-alpine AS build_base
-RUN apk add --no-cache git gcc ca-certificates libc-dev
+FROM --platform=$BUILDPLATFORM golang:1.21-alpine3.18 AS build
+# RUN apk add --no-cache git gcc ca-certificates libc-dev
 WORKDIR /build
 COPY go.mod go.sum ./
 RUN go mod download
 COPY ./ ./
-RUN go build -ldflags "-w -s" -trimpath -o speedtest .
+ARG TARGETOS TARGETARCH
+RUN --mount=type=cache,target=/root/.cache/go-build \
+  --mount=type=cache,target=/go/pkg \
+  GOOS=$TARGETOS GOARCH=$TARGETARCH CGO_ENABLED=0 go build -ldflags "-w -s" -trimpath -o speedtest .
 
-FROM alpine:3.16
-RUN apk add --no-cache ca-certificates
+FROM alpine:3.18
+# RUN apk add --no-cache ca-certificates
+COPY --from=build /etc/ssl/cert.pem /etc/ssl/cert.pem
 WORKDIR /app
-COPY --from=build_base /build/speedtest ./
+COPY --from=build /build/speedtest ./
 COPY settings.toml ./
 
 USER nobody
 EXPOSE 8989
 
-CMD ["./speedtest"]
+CMD ["/app/speedtest"]
