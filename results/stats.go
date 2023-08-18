@@ -51,10 +51,6 @@ func Stats(w http.ResponseWriter, r *http.Request) {
 
 	var data StatsData
 
-	if conf.StatsPassword == "PASSWORD" {
-		data.NoPassword = true
-	}
-
 	if !data.NoPassword {
 		op := r.FormValue("op")
 		session, _ := store.Get(r, "logged")
