@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:1.21-alpine3.18 AS build
+FROM --platform=$BUILDPLATFORM golang:1.22-alpine3.18 AS build
 # RUN apk add --no-cache git gcc ca-certificates libc-dev
 WORKDIR /build
 COPY go.mod go.sum ./

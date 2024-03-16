@@ -1,6 +1,6 @@
 module github.com/librespeed/speedtest
 
-go 1.20
+go 1.22
 
 require (
 	github.com/breml/rootcerts v0.2.1
