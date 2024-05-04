@@ -1,15 +1,13 @@
-//go:build !linux
-// +build !linux
-
 package web
 
 import (
 	"crypto/tls"
+	"net"
+	"net/http"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/librespeed/speedtest/config"
 	log "github.com/sirupsen/logrus"
-	"net"
-	"net/http"
 )
 
 func startListener(conf *config.Config, r *chi.Mux) error {
