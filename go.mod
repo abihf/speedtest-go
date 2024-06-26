@@ -18,7 +18,7 @@ require (
 	github.com/spf13/viper v1.18.2
 	github.com/umahmood/haversine v0.0.0-20151105152445-808ab04add26
 	go.etcd.io/bbolt v1.3.9
-	golang.org/x/image v0.15.0
+	golang.org/x/image v0.18.0
 )
 
 require (
@@ -39,7 +39,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
 	golang.org/x/sys v0.19.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/text v0.16.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
